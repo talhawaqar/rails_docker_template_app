@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: rails_test_app
+    depends_on:
+      - rails_db
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - path: ./Gemfile
+          action: rebuild
+
+        - path: ./Gemfile.lock
+          action: rebuild
+        
+        - path: ./config
+          action: rebuild
+
+        - path: .
+          target: /app/www
+          action: sync
+
+
+  rails_db:
+    container_name: rails_test_app_db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: deploy
+    ports:
+      - "5432:5432"
+    volumes:
+      - rails_db_v1:/var/lib/postgresql/data
+
+volumes:
+  rails_db_v1:
