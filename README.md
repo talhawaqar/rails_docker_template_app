@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a rails app dockerize template
 
 Things you may want to cover:
 
-* Ruby version
+- System dependencies
 
-* System dependencies
+  - Docker
+  - Docker Compose
 
-* Configuration
+- Run the App
 
-* Database creation
+  - docker compose up
 
-* Database initialization
+- Database creation
 
-* How to run the test suite
+  - docker compose exec app bundle exec rails db:create
 
-* Services (job queues, cache servers, search engines, etc.)
+- How to run the test suite
 
-* Deployment instructions
+  - docker compose exec app bundle exec rails test
 
-* ...
+- rails console
+  - docker compose exec app bundle exec rails c
+- ...
